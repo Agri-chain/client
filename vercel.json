@@ -16,5 +16,9 @@
         }
       ]
     }
-  ]
+  ],
+  "env": {
+    "VITE_API_BASE_URL": "https://smartkissann.vercel.app/api/v1",
+    "VITE_GOOGLE_CLIENT_ID": "404956463332-2vdnp7fg6j2qsm1gnh4u1of6o9b6iqpn.apps.googleusercontent.com"
+  }
 }
