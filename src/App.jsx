@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { AuthProvider } from './context/AuthContext.jsx';
 import { ToastProvider } from './context/ToastContext.jsx';
 import ErrorBoundary from './components/ErrorBoundary.jsx';
+import Home from './pages/Home.jsx';
 import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
 import Dashboard from './pages/Dashboard.jsx';
@@ -21,6 +22,7 @@ function App() {
           <Router>
             <div className="min-h-screen bg-gray-50">
               <Routes>
+                <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/dashboard" element={<Dashboard />} />
@@ -29,7 +31,6 @@ function App() {
                 <Route path="/verify-aadhaar" element={<VerifyAadhaar />} />
                 <Route path="/reset-password" element={<PasswordReset />} />
                 <Route path="/profile" element={<Profile />} />
-                <Route path="/" element={<Navigate to="/dashboard" replace />} />
               </Routes>
             </div>
           </Router>
