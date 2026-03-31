@@ -125,6 +125,27 @@ const Home = () => {
     { number: "25+", label: "States Covered" }
   ];
 
+  const marketplaceProducts = [
+    {
+      name: "Premium Basmati Rice",
+      location: "Punjab",
+      farmer: "Rajesh Kumar",
+      price: "₹85/kg"
+    },
+    {
+      name: "Fresh Tomatoes",
+      location: "Maharashtra", 
+      farmer: "Amit Singh",
+      price: "₹40/kg"
+    },
+    {
+      name: "Organic Turmeric",
+      location: "Karnataka",
+      farmer: "Lakshmi Reddy", 
+      price: "₹180/kg"
+    }
+  ];
+
   // Mouse tracking effect
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -171,41 +192,43 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-gray-50 to-slate-100 relative overflow-hidden">
-      {/* Interactive Mouse Follow Effect - Smaller Size */}
-      <div 
-        className="pointer-events-none fixed inset-0 z-0"
-        style={{
-          background: `radial-gradient(circle 300px at ${mousePosition.x}px ${mousePosition.y}px, rgba(34, 197, 94, 0.08), transparent 40%)`,
-        }}
-      />
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 relative overflow-hidden">
+      {/* Animated Background Gradient */}
+      <div className="absolute inset-0 opacity-30">
+        <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full filter blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full filter blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-teal-400 to-emerald-400 rounded-full filter blur-3xl animate-pulse delay-500"></div>
+      </div>
       
-      {/* Animated Background Elements - Subtle */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-20 w-64 h-64 bg-gradient-to-br from-emerald-100/20 to-green-100/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-20 w-80 h-80 bg-gradient-to-tl from-teal-100/20 to-emerald-100/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/3 right-1/3 w-72 h-72 bg-gradient-to-r from-green-100/15 to-emerald-100/15 rounded-full blur-3xl animate-pulse delay-500"></div>
-        
-        {/* Floating Particles - Smaller & Subtler */}
-        {[...Array(4)].map((_, i) => (
+      {/* Floating Particles */}
+      <div className="absolute inset-0 pointer-events-none">
+        {[...Array(6)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-3 h-3 bg-gradient-to-br from-emerald-300/20 to-green-400/20 rounded-full animate-bounce"
+            className="absolute w-2 h-2 bg-gradient-to-r from-emerald-300/40 to-teal-300/40 rounded-full animate-bounce"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
               animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${4 + Math.random() * 3}s`
+              animationDuration: `${3 + Math.random() * 4}s`
             }}
           />
         ))}
       </div>
       
+      {/* Mouse Follow Effect */}
+      <div 
+        className="pointer-events-none fixed inset-0 z-10 transition-opacity duration-300"
+        style={{
+          background: `radial-gradient(circle 400px at ${mousePosition.x}px ${mousePosition.y}px, rgba(16, 185, 129, 0.1), transparent 50%)`,
+        }}
+      />
+      
       {/* Navigation Bar */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      <nav className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
         isScrolled 
-          ? 'bg-white/70 backdrop-blur-xl border-b border-green-200/30 shadow-lg shadow-green-500/10' 
-          : 'bg-white/50 backdrop-blur-lg border-b border-green-200/20'
+          ? 'bg-white/80 backdrop-blur-2xl border-b border-emerald-200/40 shadow-lg shadow-emerald-500/20' 
+          : 'bg-white/60 backdrop-blur-xl border-b border-emerald-200/30'
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
@@ -215,7 +238,7 @@ const Home = () => {
                 onClick={() => scrollToSection(homeRef, 'home')}
                 className="flex items-center space-x-2"
               >
-                <span className="text-2xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
+                <span className="text-xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
                   SmartKissan
                 </span>
               </button>
@@ -225,40 +248,40 @@ const Home = () => {
             <div className="hidden md:flex items-center space-x-8 relative">
               <button 
                 onClick={() => scrollToSection(homeRef, 'home')}
-                className={`text-gray-700 hover:text-green-600 font-medium transition-colors py-5 px-1 ${
-                  activeSection === 'home' ? 'text-green-600' : ''
+                className={`text-gray-600 hover:text-emerald-500 font-medium transition-all duration-300 py-5 px-1 ${
+                  activeSection === 'home' ? 'text-emerald-500' : ''
                 }`}
               >
                 Home
               </button>
               <button 
                 onClick={() => scrollToSection(featuresRef, 'features')}
-                className={`text-gray-700 hover:text-green-600 font-medium transition-colors py-5 px-1 ${
-                  activeSection === 'features' ? 'text-green-600' : ''
+                className={`text-gray-600 hover:text-emerald-500 font-medium transition-all duration-300 py-5 px-1 ${
+                  activeSection === 'features' ? 'text-emerald-500' : ''
                 }`}
               >
                 Features
               </button>
               <button 
                 onClick={() => scrollToSection(marketplaceRef, 'marketplace')}
-                className={`text-gray-700 hover:text-green-600 font-medium transition-colors py-5 px-1 ${
-                  activeSection === 'marketplace' ? 'text-green-600' : ''
+                className={`text-gray-600 hover:text-emerald-500 font-medium transition-all duration-300 py-5 px-1 ${
+                  activeSection === 'marketplace' ? 'text-emerald-500' : ''
                 }`}
               >
                 Marketplace
               </button>
               <button 
                 onClick={() => scrollToSection(howItWorksRef, 'how-it-works')}
-                className={`text-gray-700 hover:text-green-600 font-medium transition-colors py-5 px-1 ${
-                  activeSection === 'how-it-works' ? 'text-green-600' : ''
+                className={`text-gray-600 hover:text-emerald-500 font-medium transition-all duration-300 py-5 px-1 ${
+                  activeSection === 'how-it-works' ? 'text-emerald-500' : ''
                 }`}
               >
                 How It Works
               </button>
               <button 
                 onClick={() => scrollToSection(aboutRef, 'about')}
-                className={`text-gray-700 hover:text-green-600 font-medium transition-colors py-5 px-1 ${
-                  activeSection === 'about' ? 'text-green-600' : ''
+                className={`text-gray-600 hover:text-emerald-500 font-medium transition-all duration-300 py-5 px-1 ${
+                  activeSection === 'about' ? 'text-emerald-500' : ''
                 }`}
               >
                 About
@@ -266,18 +289,18 @@ const Home = () => {
               
               {/* Moving Underline - Centered below nav items */}
               <div 
-                className="absolute bottom-0 h-0.5 bg-green-600 transition-all duration-300 ease-in-out"
+                className="absolute bottom-0 h-0.5 bg-gradient-to-r from-emerald-500 to-teal-500 transition-all duration-300 ease-in-out"
                 style={{
-                  width: activeSection === 'home' ? '40px' : 
-                         activeSection === 'features' ? '60px' :
-                         activeSection === 'marketplace' ? '88px' :
-                         activeSection === 'how-it-works' ? '100px' : 
-                         activeSection === 'about' ? '40px' : '0px',
+                  width: activeSection === 'home' ? '35px' : 
+                         activeSection === 'features' ? '55px' :
+                         activeSection === 'marketplace' ? '75px' :
+                         activeSection === 'how-it-works' ? '85px' : 
+                         activeSection === 'about' ? '35px' : '0px',
                   left: activeSection === 'home' ? '0px' : 
-                        activeSection === 'features' ? '64px' : 
-                        activeSection === 'marketplace' ? '152px' :
-                        activeSection === 'how-it-works' ? '240px' : 
-                        activeSection === 'about' ? '340px' : '0px',
+                        activeSection === 'features' ? '55px' : 
+                        activeSection === 'marketplace' ? '130px' :
+                        activeSection === 'how-it-works' ? '215px' : 
+                        activeSection === 'about' ? '300px' : '0px',
                 }}
               />
             </div>
@@ -285,33 +308,33 @@ const Home = () => {
             {/* Right Side Items */}
             <div className="flex items-center space-x-4">
               {/* Cart Icon */}
-              <button className="text-gray-600 hover:text-green-600 transition-colors">
-                <ShoppingCart className="w-5 h-5" />
+              <button className="text-gray-500 hover:text-emerald-500 transition-all duration-300 hover:scale-110">
+                <ShoppingCart className="w-4 h-4" />
               </button>
 
               {/* Language Icon (Placeholder) */}
-              <button className="text-gray-600 hover:text-green-600 transition-colors">
-                <Globe className="w-5 h-5" />
+              <button className="text-gray-500 hover:text-emerald-500 transition-all duration-300 hover:scale-110">
+                <Globe className="w-4 h-4" />
               </button>
 
               {/* Dark Mode Toggle */}
               <button 
                 onClick={toggleDarkMode}
-                className="text-gray-600 hover:text-green-600 transition-colors"
+                className="text-gray-500 hover:text-emerald-500 transition-all duration-300 hover:scale-110"
               >
-                {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+                {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
               </button>
 
               {/* Auth Buttons */}
               <Link 
                 to="/login"
-                className="px-4 py-2 text-gray-700 font-medium hover:text-gray-900 transition-colors"
+                className="px-3 py-1.5 text-gray-600 font-medium hover:text-emerald-500 transition-all duration-300 text-sm"
               >
                 Login
               </Link>
               <Link 
                 to="/register"
-                className="px-4 py-2 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors"
+                className="px-3 py-1.5 bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-medium rounded-lg hover:from-emerald-600 hover:to-teal-600 transition-all duration-300 transform hover:scale-105 text-sm shadow-lg shadow-emerald-500/30"
               >
                 Register
               </Link>
@@ -319,9 +342,9 @@ const Home = () => {
               {/* Mobile Menu Button */}
               <button 
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="md:hidden text-gray-600 hover:text-green-600 transition-colors"
+                className="md:hidden text-gray-500 hover:text-emerald-500 transition-all duration-300 hover:scale-110"
               >
-                {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                {isMobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
               </button>
             </div>
           </div>
@@ -335,8 +358,8 @@ const Home = () => {
                     scrollToSection(homeRef, 'home');
                     setIsMobileMenuOpen(false);
                   }}
-                  className={`text-gray-700 hover:text-green-600 font-medium transition-colors text-left ${
-                    activeSection === 'home' ? 'text-green-600' : ''
+                  className={`text-gray-600 hover:text-emerald-500 font-medium transition-all duration-300 text-left ${
+                    activeSection === 'home' ? 'text-emerald-500' : ''
                   }`}
                 >
                   Home
@@ -393,57 +416,57 @@ const Home = () => {
       {/* Main Content */}
       <main className="pt-16 relative z-10">
         {/* Home Section */}
-        <section ref={homeRef} className="h-screen flex items-center justify-center px-2 sm:px-4 md:px-6 lg:px-8 pt-0">
+        <section ref={homeRef} className="h-screen flex items-center justify-center px-2 sm:px-4 md:px-6 lg:px-8 pt-0 relative z-20">
           <div className="max-w-7xl mx-auto w-full flex items-center justify-center">
             <div className="text-center relative w-full">
-              {/* Watery Glass Card Container */}
-              <div className="bg-white/10 backdrop-blur-3xl rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 lg:p-10 shadow-2xl shadow-black/5 border border-white/20 relative overflow-hidden mx-auto max-w-6xl lg:max-w-5xl">
-                {/* Watery Effect Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-white/5 rounded-2xl sm:rounded-3xl"></div>
+              {/* Glass Card Container */}
+              <div className="bg-white/20 backdrop-blur-3xl rounded-3xl p-6 sm:p-8 md:p-10 lg:p-12 shadow-2xl shadow-black/10 border border-white/30 relative overflow-hidden mx-auto max-w-5xl lg:max-w-4xl transform hover:scale-105 transition-all duration-700">
+                {/* Glass Effect Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-white/10 rounded-3xl"></div>
                 
                 {/* Decorative Elements */}
-                <div className="absolute top-0 left-0 w-32 sm:w-40 h-32 sm:h-40 bg-gradient-to-br from-emerald-100/10 to-green-100/10 rounded-full blur-3xl"></div>
-                <div className="absolute bottom-0 right-0 w-40 sm:w-48 h-40 sm:h-48 bg-gradient-to-tl from-teal-100/10 to-emerald-100/10 rounded-full blur-3xl"></div>
+                <div className="absolute top-0 left-0 w-40 sm:w-48 h-40 sm:h-48 bg-gradient-to-br from-emerald-200/20 to-teal-200/20 rounded-full blur-3xl animate-pulse"></div>
+                <div className="absolute bottom-0 right-0 w-48 sm:w-56 h-48 sm:h-56 bg-gradient-to-tl from-cyan-200/20 to-emerald-200/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
                 
                 {/* Content */}
                 <div className="relative z-10 flex flex-col items-center justify-center">
-                  <div className="inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 bg-white/10 backdrop-blur-sm rounded-full mb-3 sm:mb-4 border border-white/20 shadow-lg shadow-black/5">
-                    <span className="text-emerald-700 font-semibold text-xs sm:text-sm">🌱 Revolutionizing Agriculture</span>
+                  <div className="inline-flex items-center px-4 py-2 bg-white/20 backdrop-blur-md rounded-full mb-4 sm:mb-6 border border-white/30 shadow-lg shadow-black/10">
+                    <span className="text-emerald-600 font-semibold text-sm sm:text-base">🌱 Revolutionizing Agriculture</span>
                   </div>
                   
-                  <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-3 sm:mb-4 leading-tight text-center">
-                    <span className="block mb-1 sm:mb-2 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent drop-shadow-lg">
+                  <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-4 sm:mb-6 leading-tight text-center">
+                    <span className="block mb-1 sm:mb-2 bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 bg-clip-text text-transparent drop-shadow-lg">
                       Transforming
                     </span>
-                    <span className="block bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 bg-clip-text text-transparent drop-shadow-lg">
+                    <span className="block bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 bg-clip-text text-transparent drop-shadow-lg">
                       Agriculture
                     </span>
-                    <span className="block text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl mt-2 sm:mt-3 bg-gradient-to-r from-emerald-700 to-green-700 bg-clip-text text-transparent font-semibold">
+                    <span className="block text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl mt-2 sm:mt-3 bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent font-semibold">
                       with SmartKissan
                     </span>
                   </h1>
                   
-                  <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-800 max-w-3xl sm:max-w-4xl mx-auto mb-6 sm:mb-8 leading-relaxed font-medium text-center px-2 sm:px-0">
+                  <p className="text-sm sm:text-base md:text-lg text-gray-700 max-w-2xl sm:max-w-3xl mx-auto mb-6 sm:mb-8 leading-relaxed font-medium text-center px-2 sm:px-0">
                     Connect directly with farmers, ensure fair prices, and revolutionize the agricultural supply chain with 
-                    <span className="text-emerald-600 font-bold"> blockchain technology</span> and 
-                    <span className="text-green-600 font-bold"> transparent transactions</span>
+                    <span className="text-emerald-500 font-bold"> blockchain technology</span> and 
+                    <span className="text-teal-500 font-bold"> transparent transactions</span>
                   </p>
                   
                   <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 justify-center items-center">
                     <button 
                       onClick={() => scrollToSection(featuresRef, 'features')}
-                      className="group px-4 sm:px-6 md:px-8 py-2 sm:py-3 bg-gradient-to-r from-emerald-500 to-green-500 text-white font-bold rounded-xl sm:rounded-2xl hover:from-emerald-600 hover:to-green-600 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl hover:shadow-emerald-500/25 backdrop-blur-sm border border-white/20 text-sm sm:text-base"
+                      className="group px-6 sm:px-8 md:px-10 py-2.5 sm:py-3 bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-bold rounded-xl hover:from-emerald-600 hover:to-teal-600 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl hover:shadow-emerald-500/30 backdrop-blur-sm border border-white/20 text-sm sm:text-base"
                     >
-                      <span className="flex items-center space-x-1 sm:space-x-2">
+                      <span className="flex items-center space-x-2">
                         <span>Explore Features</span>
                         <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform duration-300" />
                       </span>
                     </button>
                     <button 
                       onClick={() => scrollToSection(marketplaceRef, 'marketplace')}
-                      className="group px-4 sm:px-6 md:px-8 py-2 sm:py-3 bg-white/10 backdrop-blur-xl text-gray-800 font-bold rounded-xl sm:rounded-2xl hover:bg-white/20 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl hover:shadow-black/10 border border-white/30 text-sm sm:text-base"
+                      className="group px-6 sm:px-8 md:px-10 py-2.5 sm:py-3 bg-white/20 backdrop-blur-xl text-gray-700 font-bold rounded-xl hover:bg-white/30 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl hover:shadow-black/10 border border-white/30 text-sm sm:text-base"
                     >
-                      <span className="flex items-center space-x-1 sm:space-x-2">
+                      <span className="flex items-center space-x-2">
                         <ShoppingCart className="w-3 h-3 sm:w-4 sm:h-4" />
                         <span>Visit Marketplace</span>
                       </span>
@@ -452,9 +475,9 @@ const Home = () => {
                 </div>
               </div>
               
-              {/* Floating Elements - Responsive */}
-              <div className="absolute -top-8 sm:-top-12 -left-8 sm:-left-12 w-12 sm:w-16 h-12 sm:h-16 bg-gradient-to-br from-emerald-200/20 to-green-300/20 rounded-full blur-2xl animate-bounce"></div>
-              <div className="absolute -bottom-8 sm:-bottom-12 -right-8 sm:-right-12 w-16 sm:w-20 h-16 sm:h-20 bg-gradient-to-tl from-teal-200/20 to-emerald-300/20 rounded-full blur-2xl animate-bounce delay-500"></div>
+              {/* Floating Elements */}
+              <div className="absolute -top-10 sm:-top-12 -left-10 sm:-left-12 w-16 sm:w-20 h-16 sm:h-20 bg-gradient-to-br from-emerald-300/30 to-teal-300/30 rounded-full blur-2xl animate-bounce"></div>
+              <div className="absolute -bottom-10 sm:-bottom-12 -right-10 sm:-right-12 w-20 sm:w-24 h-20 sm:h-24 bg-gradient-to-tl from-cyan-300/30 to-emerald-300/30 rounded-full blur-2xl animate-bounce delay-500"></div>
             </div>
           </div>
         </section>
@@ -627,51 +650,6 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-
-              {/* Marketplace Section */}
-        <section ref={marketplaceRef} className="max-w-7xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
-          {/* Header Section */}
-          <div className="text-center mb-12 sm:mb-16 lg:mb-20">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 sm:mb-6">
-              Farmers Marketplace
-            </h2>
-            <p className="text-base sm:text-lg md:text-xl text-gray-700 max-w-3xl sm:max-w-4xl mx-auto font-medium px-2 sm:px-0">
-              Browse fresh produce directly from local farmers at fair prices
-            </p>
-          </div>
-
-          {/* Product Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {marketplaceProducts.map((product, index) => (
-              <div key={index} className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
-                <div className="h-48 sm:h-56 bg-gradient-to-br from-green-100 to-emerald-100 flex items-center justify-center">
-                  <Package className="w-16 sm:w-20 h-16 sm:h-20 text-green-600" />
-                </div>
-                <div className="p-4 sm:p-6">
-                  <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">{product.name}</h3>
-                  <div className="space-y-1 mb-3 sm:mb-4">
-                    <div className="flex items-center text-sm text-gray-600">
-                      <MapPin className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
-                      <span className="text-xs sm:text-sm">{product.location}</span>
-                    </div>
-                    <div className="flex items-center text-sm text-gray-600">
-                      <Users className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
-                      <span className="text-xs sm:text-sm">{product.farmer}</span>
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <span className="text-xl sm:text-2xl font-bold text-green-600">{product.price}</span>
-                    </div>
-                    <button className="px-3 sm:px-4 py-1.5 sm:py-2 bg-green-600 text-white text-xs sm:text-sm font-medium rounded-lg hover:bg-green-700 transition-colors">
-                      Contact Farmer
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
 
               <div className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow duration-300">
                 <div className="flex items-start space-x-4">

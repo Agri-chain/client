@@ -260,148 +260,197 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Sign in to your account
-          </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
-            Or{' '}
-            <Link
-              to="/register"
-              className="font-medium text-indigo-600 hover:text-indigo-500"
-            >
-              create a new account
-            </Link>
-          </p>
-        </div>
-        
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          {fieldErrors.general && (
-            <div className="text-red-600 text-sm text-center">{fieldErrors.general}</div>
-          )}
-          
-          <div className="rounded-md shadow-sm -space-y-px">
-            <div>
-              <label htmlFor="email" className="sr-only">
-                Email address
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                required
-                className={`appearance-none rounded-none relative block w-full px-3 py-2 border ${fieldErrors.email ? 'border-red-500' : 'border-gray-300'} placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm`}
-                placeholder="Email address"
-                value={formData.email}
-                onChange={handleChange}
-              />
-              {fieldErrors.email && (
-                <div className="text-red-600 text-xs mt-1">{fieldErrors.email}</div>
-              )}
-            </div>
-            <div className="relative">
-              <label htmlFor="password" className="sr-only">
-                Password
-              </label>
-              <input
-                id="password"
-                name="password"
-                type={showPassword ? 'text' : 'password'}
-                autoComplete="current-password"
-                required
-                className={`appearance-none rounded-none relative block w-full px-3 py-2 pr-10 border ${fieldErrors.password ? 'border-red-500' : 'border-gray-300'} placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm`}
-                placeholder="Password"
-                value={formData.password}
-                onChange={handleChange}
-              />
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 focus:outline-none"
-              >
-                {showPassword ? (
-                  <EyeOff className="h-4 w-4" />
-                ) : (
-                  <Eye className="h-4 w-4" />
-                )}
-              </button>
-              {fieldErrors.password && (
-                <div className="text-red-600 text-xs mt-1">{fieldErrors.password}</div>
-              )}
-              {formData.password && !passwordStrength.isValid && (
-                <div className="text-gray-500 text-xs mt-1">
-                  Password needs: {passwordStrength.errors.join(', ')}
-                </div>
-              )}
-            </div>
-          </div>
-
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <input
-                id="remember-me"
-                name="remember-me"
-                type="checkbox"
-                className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-              />
-              <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
-                Remember me
-              </label>
-            </div>
-
-            <div className="text-sm">
-              <Link 
-                to="/reset-password" 
-                className="font-medium text-indigo-600 hover:text-indigo-500"
-              >
-                Forgot your password?
-              </Link>
-            </div>
-          </div>
-
-          <div>
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {isLoading ? 'Signing in...' : 'Sign in'}
-            </button>
-          </div>
-
-          <div className="mt-6">
-              <div className="relative">
-                <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-gray-300" />
-                </div>
-                <div className="relative flex justify-center text-sm">
-                  <span className="px-2 bg-gray-50 text-gray-500">Or continue with</span>
-                </div>
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 relative overflow-hidden">
+      {/* Animated Background Gradient */}
+      <div className="absolute inset-0 opacity-30">
+        <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full filter blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full filter blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-teal-400 to-emerald-400 rounded-full filter blur-3xl animate-pulse delay-500"></div>
+      </div>
+      
+      {/* Floating Particles */}
+      <div className="absolute inset-0 pointer-events-none">
+        {[...Array(6)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-2 h-2 bg-gradient-to-r from-emerald-300/40 to-teal-300/40 rounded-full animate-bounce"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 5}s`,
+              animationDuration: `${3 + Math.random() * 4}s`
+            }}
+          />
+        ))}
+      </div>
+      
+      <div className="relative z-10 flex items-center justify-center min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-md w-full">
+          {/* Glass Card Container */}
+          <div className="bg-white/20 backdrop-blur-3xl rounded-3xl p-8 sm:p-10 shadow-2xl shadow-black/10 border border-white/30 relative overflow-hidden transform hover:scale-[1.02] transition-all duration-700">
+            {/* Glass Effect Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-white/10 rounded-3xl"></div>
+            
+            {/* Decorative Elements */}
+            <div className="absolute top-0 left-0 w-40 h-40 bg-gradient-to-br from-emerald-200/20 to-teal-200/20 rounded-full blur-3xl animate-pulse"></div>
+            <div className="absolute bottom-0 right-0 w-48 h-48 bg-gradient-to-tl from-cyan-200/20 to-emerald-200/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+            
+            {/* Content */}
+            <div className="relative z-10">
+              <div className="text-center">
+                <h2 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 bg-clip-text text-transparent mb-2">
+                  Sign in to your account
+                </h2>
+                <p className="text-sm text-gray-600 mb-8">
+                  Or{' '}
+                  <Link
+                    to="/register"
+                    className="font-medium text-emerald-500 hover:text-emerald-600 transition-colors"
+                  >
+                    create a new account
+                  </Link>
+                </p>
               </div>
-
-              <div className="mt-6">
-                <div className="flex justify-center">
-                  {!googleAuthReady ? (
-                    <div className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-gray-100">
-                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-gray-600 mr-2"></div>
-                      Loading Google...
+              
+              <form className="space-y-6" onSubmit={handleSubmit}>
+                {/* Google Auth Section - Top */}
+                <div className="space-y-4">
+                  <div className="relative">
+                    <div className="absolute inset-0 flex items-center">
+                      <div className="w-full border-t border-gray-300" />
                     </div>
-                  ) : (
-                    <div id="google-signin-button" className="w-full"></div>
+                    <div className="relative flex justify-center text-sm">
+                      <span className="px-4 bg-white/80 backdrop-blur-sm text-gray-500">Or continue with</span>
+                    </div>
+                  </div>
+                  
+                  <div className="flex justify-center">
+                    {!googleAuthReady ? (
+                      <div className="w-full max-w-xs flex items-center justify-center px-6 py-3 border border-gray-300 rounded-xl shadow-sm text-sm font-medium text-gray-700 bg-white/60 backdrop-blur-sm">
+                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-emerald-500 mr-2"></div>
+                        Loading Google...
+                      </div>
+                    ) : (
+                      <div className="w-full max-w-xs">
+                        <div id="google-signin-button" className="w-full"></div>
+                      </div>
+                    )}
+                  </div>
+                  
+                  {googleLoading && (
+                    <div className="text-center text-sm text-gray-600">
+                      Authenticating with Google...
+                    </div>
                   )}
                 </div>
                 
-                {googleLoading && (
-                  <div className="mt-2 text-center text-sm text-gray-600">
-                    Authenticating with Google...
+                {/* Email/Password Section */}
+                <div className="relative">
+                  <div className="absolute inset-0 flex items-center">
+                    <div className="w-full border-t border-gray-300" />
                   </div>
+                  <div className="relative flex justify-center text-sm">
+                    <span className="px-4 bg-white/80 backdrop-blur-sm text-gray-500">Or sign in with email</span>
+                  </div>
+                </div>
+                {fieldErrors.general && (
+                  <div className="bg-red-50/80 backdrop-blur-sm border border-red-200 text-red-600 text-sm text-center p-3 rounded-xl">{fieldErrors.general}</div>
                 )}
-              </div>
+                
+                <div className="space-y-4 max-w-md mx-auto">
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                      Email address
+                    </label>
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      autoComplete="email"
+                      required
+                      className={`appearance-none relative block w-full px-4 py-3 border ${fieldErrors.email ? 'border-red-500' : 'border-gray-300'} placeholder-gray-400 text-gray-900 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 bg-white/60 backdrop-blur-sm transition-all duration-300`}
+                      placeholder="Enter your email"
+                      value={formData.email}
+                      onChange={handleChange}
+                    />
+                    {fieldErrors.email && (
+                      <div className="text-red-600 text-xs mt-1">{fieldErrors.email}</div>
+                    )}
+                  </div>
+                  
+                  <div className="relative">
+                    <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+                      Password
+                    </label>
+                    <input
+                      id="password"
+                      name="password"
+                      type={showPassword ? 'text' : 'password'}
+                      autoComplete="current-password"
+                      required
+                      className={`appearance-none relative block w-full px-4 py-3 pr-12 border ${fieldErrors.password ? 'border-red-500' : 'border-gray-300'} placeholder-gray-400 text-gray-900 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 bg-white/60 backdrop-blur-sm transition-all duration-300`}
+                      placeholder="Enter your password"
+                      value={formData.password}
+                      onChange={handleChange}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-0 top-[26px] pr-3 flex items-center text-gray-400 hover:text-emerald-500 focus:outline-none transition-colors"
+                    >
+                      {showPassword ? (
+                        <EyeOff className="h-5 w-5" />
+                      ) : (
+                        <Eye className="h-5 w-5" />
+                      )}
+                    </button>
+                    {fieldErrors.password && (
+                      <div className="text-red-600 text-xs mt-1">{fieldErrors.password}</div>
+                    )}
+                    {formData.password && !passwordStrength.isValid && (
+                      <div className="text-gray-500 text-xs mt-1">
+                        Password needs: {passwordStrength.errors.join(', ')}
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                <div className="space-y-4 max-w-md mx-auto">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                      <input
+                        id="remember-me"
+                        name="remember-me"
+                        type="checkbox"
+                        className="h-4 w-4 text-emerald-500 focus:ring-emerald-500 border-gray-300 rounded"
+                      />
+                      <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700">
+                        Remember me
+                      </label>
+                    </div>
+
+                    <div className="text-sm">
+                      <Link 
+                        to="/reset-password" 
+                        className="font-medium text-emerald-500 hover:text-emerald-600 transition-colors"
+                      >
+                        Forgot your password?
+                      </Link>
+                    </div>
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={isLoading}
+                    className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-xl text-white bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 transform hover:scale-105 shadow-lg shadow-emerald-500/30"
+                  >
+                    {isLoading ? 'Signing in...' : 'Sign in'}
+                  </button>
+                </div>
+              </form>
             </div>
-        </form>
+          </div>
+        </div>
       </div>
     </div>
   );
